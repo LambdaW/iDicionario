@@ -15,7 +15,7 @@
     self.title = @"B";
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(next:)];
-    self.navigationItem.rightBarButtonItem=next;
+    self.navigationItem.rightBarButtonItem = next;
     
     UIButton *botao = [UIButton
                        buttonWithType:UIButtonTypeSystem];

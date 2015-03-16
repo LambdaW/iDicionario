@@ -10,17 +10,43 @@
 #import "LetraBViewController.h"
 
 @implementation LetraAViewController
+{
+}
 
-
+@synthesize i, alfabeto, fromLabel, img;
 
 -(void) viewDidLoad {
+
     [super viewDidLoad];
-    self.title = @"A";
-    UIBarButtonItem *next = [[UIBarButtonItem alloc]
-                             initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(next:)];
-    self.navigationItem.rightBarButtonItem=next;
+    alfabeto =[NSArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];
+
     
-    UIButton *botao = [UIButton
+    img =[[UIImageView alloc] initWithFrame:CGRectMake(140,200,50,80)];
+    img.image=[UIImage imageNamed:@"a.png"];
+    
+    [self.view addSubview:img];
+
+
+    UIBarButtonItem *next = [[UIBarButtonItem alloc]
+                             initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(getNext:)];
+    self.navigationItem.rightBarButtonItem = next;
+    
+    UIBarButtonItem *back = [[UIBarButtonItem alloc]
+                             initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(getBack:)];
+    
+    self.navigationItem.leftBarButtonItem = back;
+
+   
+    //UILabel *alfaLabel = [[UILabel alloc]initWithFrame:YES];
+    fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 50, 80,100)];
+    
+    
+    fromLabel.center = self.view.center;
+    
+    [self.view addSubview:fromLabel];
+ 
+    //fromLabel.text = @"aaaaaaaaa";
+    /*UIButton *botao = [UIButton
                                         buttonWithType:UIButtonTypeSystem];
     [botao
      setTitle:@"Mostre uma palavra, uma figura e leia a palavra ao apertar um botao"
@@ -29,18 +55,56 @@
     botao.center = self.view.center;
     
     [self.view addSubview:botao];
-    
+*/
  
 }
 
--(void)next:(id)sender {
-    LetraBViewController *proximo = [[LetraBViewController alloc]
-                                              initWithNibName:nil
-                                            bundle:NULL];
-    [self.navigationController pushViewController:proximo
-                                         animated:YES];
+-(void)viewDidAppear:(BOOL)animated{
+  //  i++;
+    self.title = alfabeto[i];
+}
+
+-(void)getNext:(id)sender {
+
+    if(i <=24){
+        i = i + 1;
+        
+        
+        self.fromLabel.text = alfabeto[i];
+       NSString *imgurl = [alfabeto[i] substringWithRange:NSMakeRange(0, 1)];
+        self.title = imgurl;
+
+        imgurl = [imgurl stringByAppendingString:@".png"];
+        
+        
+        img.image=[UIImage imageNamed:imgurl];
+
+    
+        
+    }
+    
+
+    
     
 }
+
+-(void)getBack:(id)sender{
+
+    if(i >= 1){
+       i = i - 1;
+       self.fromLabel.text = alfabeto[i];
+        NSString *imgurl = [alfabeto[i] substringWithRange:NSMakeRange(0, 1)];
+        self.title = imgurl;
+
+        imgurl = [imgurl stringByAppendingString:@".png"];
+        
+
+        img.image=[UIImage imageNamed:imgurl];
+    }
+}
+
+
+
 
 
 

@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LetraAViewController : UIViewController
+@interface LetraAViewController : UIViewController{
+     NSArray *alfabeto ;
+    int i ;
 
+}
+@property UILabel *fromLabel;
+@property UIImageView *img;
+
+@property NSArray *alfabeto;
+@property  int i;
 @end
