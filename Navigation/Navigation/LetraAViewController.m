@@ -45,7 +45,6 @@
     
     [self.view addSubview:fromLabel];
  
-    //fromLabel.text = @"aaaaaaaaa";
     /*UIButton *botao = [UIButton
                                         buttonWithType:UIButtonTypeSystem];
     [botao
