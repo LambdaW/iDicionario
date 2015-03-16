@@ -13,6 +13,10 @@
     int i ;
 
 }
+-(UIColor* )getRandomColor;
+-(void)print;
+
+
 @property UILabel *fromLabel;
 @property UIImageView *img;
 
