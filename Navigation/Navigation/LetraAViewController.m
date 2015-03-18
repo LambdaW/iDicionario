@@ -50,7 +50,7 @@
     [fromLabel setTextAlignment:NSTextAlignmentCenter];
     fromLabel.center = self.view.center;
     [self.view addSubview:fromLabel];
-    self.fromLabel.text = alfabeto[0];
+    self.fromLabel.text = alfabeto[sharedManager.cont];
 
     /*UIButton *botao = [UIButton
      buttonWithType:UIButtonTypeSystem];
@@ -73,7 +73,7 @@
 
     NSLog(@"appar");
 
-    self.title = alfabeto[i];
+    self.title = alfabeto[sharedManager.cont];
 
     self.view.backgroundColor = [UIColor whiteColor];
     CAKeyframeAnimation *theAnimation = [CAKeyframeAnimation animation];
@@ -183,7 +183,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
 
 
-   [self.navigationController pushViewController:[self myVC] animated:YES];
+   [self.navigationController pushViewController:[self myVC] animated:NO];
     }else{
         self.view = nil;
 
@@ -191,7 +191,7 @@
         
 
 
-        [self.navigationController popToViewController: myVC animated:YES];
+        [self.navigationController popToViewController: myVC animated:NO];
     }
 
     
