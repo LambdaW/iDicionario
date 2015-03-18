@@ -29,10 +29,15 @@
 -(void) viewDidLoad {
     [super viewDidLoad];
     NSLog(@"load");
+    Contador *sharedManager = [Contador sharedManager];
 
     alfabeto =[NSArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];
     img =[[UIImageView alloc] initWithFrame:CGRectMake(110,200,80,80)];
-    img.image=[UIImage imageNamed:@"a.png"];
+    NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+    self.title = imgurl;
+    imgurl = [imgurl stringByAppendingString:@".png"];
+    img.image=[UIImage imageNamed:imgurl];
+
     [self.view addSubview:img];
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
                              initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(getNext:)];
@@ -58,6 +63,14 @@
      */
 }
 -(void)viewDidAppear:(BOOL)animated{
+    Contador *sharedManager = [Contador sharedManager];
+
+    self.fromLabel.text = alfabeto[sharedManager.cont];
+    NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+    self.title = imgurl;
+    imgurl = [imgurl stringByAppendingString:@".png"];
+    img.image=[UIImage imageNamed:imgurl];
+
     NSLog(@"appar");
 
     self.title = alfabeto[i];
@@ -119,10 +132,13 @@
 
 
 //[self myVC]
+    Contador *sharedManager = [Contador sharedManager];
+    
+    
     
     
 
-  self.view.backgroundColor = [UIColor whiteColor];
+ /* self.view.backgroundColor = [UIColor whiteColor];
     CAKeyframeAnimation *theAnimation = [CAKeyframeAnimation animation];
     theAnimation.values = [NSArray arrayWithObjects:
                            [NSValue valueWithCATransform3D:CATransform3DMakeRotation(0, 0,1,0)],
@@ -163,7 +179,7 @@
                      completion:^(BOOL finished){
                      }];
 
-    if(myVC == nil){
+    */if(myVC == nil){
         [self dismissViewControllerAnimated:YES completion:nil];
 
 
@@ -179,10 +195,10 @@
     }
 
     
-    if(i <=24){
-        i = i + 1;
-        self.fromLabel.text = alfabeto[i];
-        NSString *imgurl = [alfabeto[i] substringWithRange:NSMakeRange(0, 1)];
+    if(    sharedManager.cont <= 24){
+        [sharedManager nextInt];
+        self.fromLabel.text = alfabeto[sharedManager.cont];
+        NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
         self.title = imgurl;
         imgurl = [imgurl stringByAppendingString:@".png"];
         img.image=[UIImage imageNamed:imgurl];

@@ -22,8 +22,8 @@
 
 
 
--(int)previousInt;
--(int)nextInt;
+-(void)previousInt;
+-(void)nextInt;
 @property int cont;
 
 

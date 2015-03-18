@@ -12,15 +12,14 @@
 @synthesize cont;
 
 
--(int)previousInt{
+-(void)previousInt{
     cont--;
-    return cont;
     
 }
 
--(int)nextInt{
+-(void)nextInt{
      cont++;
-    return cont;
+    
 }
 
 
