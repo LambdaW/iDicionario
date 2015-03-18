@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Contador.h"
-#import "LetraAViewController.h"
-#import "LetraBViewController.h"
+
 @interface LetraAViewController : UIViewController{
      NSArray *alfabeto ;
 

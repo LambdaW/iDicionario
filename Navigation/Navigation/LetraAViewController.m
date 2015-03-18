@@ -7,9 +7,8 @@
 //
 
 #import "LetraAViewController.h"
-#import "LetraBViewController.h"
 #import "Contador.h"
-#import "LetraC.h"
+
 
 @implementation LetraAViewController
 
@@ -38,7 +37,10 @@
     
     imgurl = [imgurl stringByAppendingString:@".png"];
     [self.view addSubview:fromLabel];
-    img.image=[UIImage imageNamed:imgurl];
+    UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
+    img.image= image;
+    
+    //  img.image=[UIImage imageNamed:imgurl];
     self.fromLabel.text = imgurl;
 
     [self.view addSubview:img];
@@ -53,17 +55,7 @@
     [fromLabel setTextAlignment:NSTextAlignmentCenter];
     fromLabel.center = self.view.center;
     [self.view addSubview:fromLabel];
-   // self.fromLabel.text = alfabeto[sharedManager.cont];
-
-    /*UIButton *botao = [UIButton
-     buttonWithType:UIButtonTypeSystem];
-     [botao
-     setTitle:@"Mostre uma palavra, uma figura e leia a palavra ao apertar um botao"
-     forState:UIControlStateNormal];
-     [botao sizeToFit];
-     botao.center = self.view.center;
-     [self.view addSubview:botao];
-     */
+   
 }
 -(void)viewDidAppear:(BOOL)animated{
     Contador *sharedManager = [Contador sharedManager];
@@ -71,13 +63,19 @@
     self.fromLabel.text = alfabeto[sharedManager.cont];
     NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
     self.title = imgurl;
+    imgurl  =   [imgurl lowercaseString];
+    NSString *file = [[NSBundle mainBundle] pathForResource:imgurl ofType:@"png"];
+
+
     imgurl = [imgurl stringByAppendingString:@".png"];
-    img.image=[UIImage imageNamed:imgurl];
+   
 
-    NSLog(@"appar");
+    UIImage *image = [UIImage imageWithContentsOfFile:file];
+  
+    img.image= image;
+  
 
 
-    self.view.backgroundColor = [UIColor whiteColor];
     CAKeyframeAnimation *theAnimation = [CAKeyframeAnimation animation];
     theAnimation.values = [NSArray arrayWithObjects:
                            [NSValue valueWithCATransform3D:CATransform3DMakeRotation(0, 0,1,0)],
@@ -127,6 +125,8 @@
 }
 
 
+
+
 -(void)getNext:(id)sender {
    
     
@@ -138,51 +138,7 @@
     
     [sharedManager nextInt];
 
-    
-    
 
- /* self.view.backgroundColor = [UIColor whiteColor];
-    CAKeyframeAnimation *theAnimation = [CAKeyframeAnimation animation];
-    theAnimation.values = [NSArray arrayWithObjects:
-                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(0, 0,1,0)],
-                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.13, 0,1,0)],
-                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.13, 0,1,0)],
-                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(6.26, 0,1,0)],
-                           nil];
-    
-    theAnimation.cumulative = YES;
-    theAnimation.duration = 2.2;
-    theAnimation.repeatCount = 1;
-    theAnimation.removedOnCompletion = YES;
-    
-    
-    theAnimation.timingFunctions =
-    [NSArray arrayWithObjects:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn],
-     
-     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut],nil
-     ];
-    
-    [img.layer addAnimation:theAnimation forKey:@"transform"];
-    
-    [UIView animateWithDuration:3
-                          delay:0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [self.view setAlpha:0.7f];
-                         CABasicAnimation *animation = [CABasicAnimation animation];
-                         animation.keyPath = @"position.y";
-                         animation.fromValue = @0;
-                         animation.toValue = @230;
-                         animation.duration = 2;
-                         [img.layer addAnimation:animation forKey:@"basic"];
-                         self.view.backgroundColor = [self getRandomColor];
-                         //   [self.view setBackgroundColor:color];
-                         // [fromLabel setBackgroundColor:blackColor ];
-                     }
-                     completion:^(BOOL finished){
-                     }];
-
-    */
     
     if(    sharedManager.cont <= 25){
         
@@ -193,7 +149,10 @@
         self.title = imgurl;
         imgurl = [imgurl stringByAppendingString:@".png"];
 
-        img.image=[UIImage imageNamed:imgurl];
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
+        img.image= image;
+
     }
     if(sharedManager.cont >= 26){
         sharedManager.cont = 0;
@@ -202,55 +161,34 @@
         NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
         
         self.title = imgurl;
+        imgurl  =   [imgurl lowercaseString];
+
         imgurl = [imgurl stringByAppendingString:@".png"];
         
-        img.image=[UIImage imageNamed:imgurl];
+       // img.image=[UIImage imageNamed:imgurl];
+        UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
+        img.image= image;
     }
     
     if(myVC == nil){
-        [self dismissViewControllerAnimated:NO completion:nil];
+       // [self dismissViewControllerAnimated:NO completion:nil];
         
         
-        [self.navigationController pushViewController:[self myVC] animated:NO];
+        [self.navigationController pushViewController:[self myVC] animated:YES];
     }else{
         self.view = nil;
         ;
         
-        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         
         
-        [self.navigationController popToViewController:myVC animated:NO];
+        [self.navigationController popToViewController:myVC animated:YES];
     }
 
 }
 -(void)getBack:(id)sender{
-   /* [UIView animateWithDuration:3
-                          delay:0.0
-                        options: UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         [self.view setAlpha:0.7f];
-                         CABasicAnimation *animation = [CABasicAnimation animation];
-                         animation.keyPath = @"position.y";
-                         animation.fromValue = @0;
-                         animation.toValue = @230;
-                         animation.duration = 2;
-                         [img.layer addAnimation:animation forKey:@"basic"];
-                         self.view.backgroundColor = [self getRandomColor];
-                         //[self.view setBackgroundColor:c];
-                         // [fromLabel setBackgroundColor:blackColor ];
-                     }
-                     completion:^(BOOL finished){
-                     }];
-    if(i >= 1){
-        i = i - 1;
-        self.fromLabel.text = alfabeto[i];
-        NSString *imgurl = [alfabeto[i] substringWithRange:NSMakeRange(0, 1)];
-        self.title = imgurl;
-        imgurl = [imgurl stringByAppendingString:@".png"];
-        img.image = [UIImage imageNamed:imgurl];
-        
-    }*/
+
     Contador *sharedManager = [Contador sharedManager];
     
 
@@ -258,14 +196,34 @@
     if(    sharedManager.cont > 0){
         [sharedManager previousInt];
 
+        
+        
         self.fromLabel.text = alfabeto[sharedManager.cont];
         
         NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
-        
         self.title = imgurl;
         imgurl = [imgurl stringByAppendingString:@".png"];
+        imgurl  =   [imgurl lowercaseString];
+
+        UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
+        img.image= image;
         
-        img.image=[UIImage imageNamed:imgurl];
+        if(myVC == nil){
+            // [self dismissViewControllerAnimated:NO completion:nil];
+            
+            
+            [self.navigationController pushViewController:[self myVC] animated:YES];
+        }else{
+            self.view = nil;
+            ;
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            
+            
+            [self.navigationController popToViewController:myVC animated:YES];
+        }
+
     }
 }
 
