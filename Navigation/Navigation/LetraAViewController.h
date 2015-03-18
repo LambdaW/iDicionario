@@ -7,19 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Contador.h"
+#import "LetraAViewController.h"
+#import "LetraBViewController.h"
 @interface LetraAViewController : UIViewController{
      NSArray *alfabeto ;
-    int i ;
 
 }
 -(UIColor* )getRandomColor;
--(void)print;
+@property LetraAViewController *proximo1;
+@property LetraAViewController *proximo2 ;
 
-
+@property UITabBarController *tabBarController;
 @property UILabel *fromLabel;
 @property UIImageView *img;
-
 @property NSArray *alfabeto;
 @property  int i;
+@property (nonatomic, strong) LetraAViewController *myVC;
 @end

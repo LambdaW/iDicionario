@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LetraAViewController.h"
 
-@interface LetraBViewController : UIViewController
+@interface LetraBViewController : NSObject
+{
+     NSArray *alfabeto ;
+}
+
+@property UITabBarController *tabBarController;
+
+-(UIColor* )getRandomColor;
+
+@property UILabel *fromLabel;
+@property UIImageView *img;
+
+@property NSArray *alfabeto;
+@property  int i;
+
 
 @end

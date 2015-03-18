@@ -9,6 +9,7 @@
 #import "MackenzieAppDelegate.h"
 #import "LetraAViewController.h"
 
+
 @implementation MackenzieAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
