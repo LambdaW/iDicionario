@@ -35,8 +35,11 @@
     img =[[UIImageView alloc] initWithFrame:CGRectMake(110,200,80,80)];
     NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
     self.title = imgurl;
+    
     imgurl = [imgurl stringByAppendingString:@".png"];
+    [self.view addSubview:fromLabel];
     img.image=[UIImage imageNamed:imgurl];
+    self.fromLabel.text = imgurl;
 
     [self.view addSubview:img];
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
@@ -50,7 +53,7 @@
     [fromLabel setTextAlignment:NSTextAlignmentCenter];
     fromLabel.center = self.view.center;
     [self.view addSubview:fromLabel];
-    self.fromLabel.text = alfabeto[sharedManager.cont];
+   // self.fromLabel.text = alfabeto[sharedManager.cont];
 
     /*UIButton *botao = [UIButton
      buttonWithType:UIButtonTypeSystem];
@@ -73,7 +76,6 @@
 
     NSLog(@"appar");
 
-    self.title = alfabeto[sharedManager.cont];
 
     self.view.backgroundColor = [UIColor whiteColor];
     CAKeyframeAnimation *theAnimation = [CAKeyframeAnimation animation];
@@ -134,7 +136,8 @@
 //[self myVC]
     Contador *sharedManager = [Contador sharedManager];
     
-    
+    [sharedManager nextInt];
+
     
     
 
@@ -179,30 +182,47 @@
                      completion:^(BOOL finished){
                      }];
 
-    */if(myVC == nil){
-        [self dismissViewControllerAnimated:YES completion:nil];
-
-
-   [self.navigationController pushViewController:[self myVC] animated:NO];
-    }else{
-        self.view = nil;
-
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-
-
-        [self.navigationController popToViewController: myVC animated:NO];
-    }
-
+    */
     
-    if(    sharedManager.cont <= 24){
-        [sharedManager nextInt];
+    if(    sharedManager.cont <= 25){
+        
         self.fromLabel.text = alfabeto[sharedManager.cont];
+
         NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+
         self.title = imgurl;
         imgurl = [imgurl stringByAppendingString:@".png"];
+
         img.image=[UIImage imageNamed:imgurl];
     }
+    if(sharedManager.cont >= 26){
+        sharedManager.cont = 0;
+        self.fromLabel.text = alfabeto[sharedManager.cont];
+        
+        NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+        
+        self.title = imgurl;
+        imgurl = [imgurl stringByAppendingString:@".png"];
+        
+        img.image=[UIImage imageNamed:imgurl];
+    }
+    
+    if(myVC == nil){
+        [self dismissViewControllerAnimated:NO completion:nil];
+        
+        
+        [self.navigationController pushViewController:[self myVC] animated:NO];
+    }else{
+        self.view = nil;
+        ;
+        
+        [self dismissViewControllerAnimated:NO completion:nil];
+        
+        
+        
+        [self.navigationController popToViewController:myVC animated:NO];
+    }
+
 }
 -(void)getBack:(id)sender{
     [UIView animateWithDuration:3
