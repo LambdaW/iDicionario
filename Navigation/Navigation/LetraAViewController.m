@@ -225,7 +225,7 @@
 
 }
 -(void)getBack:(id)sender{
-    [UIView animateWithDuration:3
+   /* [UIView animateWithDuration:3
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseIn
                      animations:^{
@@ -250,6 +250,22 @@
         imgurl = [imgurl stringByAppendingString:@".png"];
         img.image = [UIImage imageNamed:imgurl];
         
+    }*/
+    Contador *sharedManager = [Contador sharedManager];
+    
+
+    
+    if(    sharedManager.cont > 0){
+        [sharedManager previousInt];
+
+        self.fromLabel.text = alfabeto[sharedManager.cont];
+        
+        NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+        
+        self.title = imgurl;
+        imgurl = [imgurl stringByAppendingString:@".png"];
+        
+        img.image=[UIImage imageNamed:imgurl];
     }
 }
 
