@@ -48,6 +48,8 @@
 		52F414511ABB604700708D32 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F414371ABB604700708D32 /* x.png */; };
 		52F414521ABB604700708D32 /* y.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F414381ABB604700708D32 /* y.png */; };
 		52F414531ABB604700708D32 /* z.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F414391ABB604700708D32 /* z.png */; };
+		52F414561ABB821F00708D32 /* EditAlfabetoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F414551ABB821F00708D32 /* EditAlfabetoViewController.m */; };
+		52F414591ABB85D200708D32 /* Teste.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F414581ABB85D200708D32 /* Teste.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +111,10 @@
 		52F414371ABB604700708D32 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = x.png; path = "Pasta Imagens/x.png"; sourceTree = "<group>"; };
 		52F414381ABB604700708D32 /* y.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = y.png; path = "Pasta Imagens/y.png"; sourceTree = "<group>"; };
 		52F414391ABB604700708D32 /* z.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = z.png; path = "Pasta Imagens/z.png"; sourceTree = "<group>"; };
+		52F414541ABB821F00708D32 /* EditAlfabetoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAlfabetoViewController.h; sourceTree = "<group>"; };
+		52F414551ABB821F00708D32 /* EditAlfabetoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAlfabetoViewController.m; sourceTree = "<group>"; };
+		52F414571ABB85D200708D32 /* Teste.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teste.h; sourceTree = "<group>"; };
+		52F414581ABB85D200708D32 /* Teste.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Teste.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,8 @@
 		27156F4018B76AF50053A99C = {
 			isa = PBXGroup;
 			children = (
+				52F414541ABB821F00708D32 /* EditAlfabetoViewController.h */,
+				52F414551ABB821F00708D32 /* EditAlfabetoViewController.m */,
 				52F414201ABB604600708D32 /* a.png */,
 				52F414211ABB604600708D32 /* b.png */,
 				52F414221ABB604600708D32 /* c.png */,
@@ -203,6 +211,8 @@
 				27156F5E18B76AF50053A99C /* Images.xcassets */,
 				27156F5318B76AF50053A99C /* Supporting Files */,
 				27156F7B18BA89430053A99C /* LetraAViewController.h */,
+				52F414571ABB85D200708D32 /* Teste.h */,
+				52F414581ABB85D200708D32 /* Teste.m */,
 				27156F7C18BA89430053A99C /* LetraAViewController.m */,
 			);
 			path = Navigation;
@@ -282,7 +292,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = Mackenzie;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Vinicius Miana";
 				TargetAttributes = {
 					27156F6318B76AF50053A99C = {
@@ -360,7 +370,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				27156F5D18B76AF50053A99C /* MackenzieAppDelegate.m in Sources */,
+				52F414591ABB85D200708D32 /* Teste.m in Sources */,
 				27156F7D18BA89430053A99C /* LetraAViewController.m in Sources */,
+				52F414561ABB821F00708D32 /* EditAlfabetoViewController.m in Sources */,
 				522DB2ED1AB8AAC4007487AD /* Contador.m in Sources */,
 				27156F5918B76AF50053A99C /* main.m in Sources */,
 				52C56CC91ABB515900B7C3C6 /* AlfabetoLista.m in Sources */,
@@ -409,7 +421,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -448,7 +459,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -506,7 +516,6 @@
 		27156F7918B76AF50053A99C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Navigation.app/Navigation";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -529,7 +538,6 @@
 		27156F7A18B76AF50053A99C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Navigation.app/Navigation";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

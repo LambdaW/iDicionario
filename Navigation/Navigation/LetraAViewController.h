@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Contador.h"
-
+#import "Teste.h"
+#import "AlfabetoLista.h"
 @interface LetraAViewController : UIViewController{
      NSArray *alfabeto ;
 
@@ -21,6 +22,10 @@
 @property UILabel *fromLabel;
 @property UIImageView *img;
 @property NSArray *alfabeto;
-@property  int i;
+//@property (nonatomic, strong)  Teste *editar;
+
 @property (nonatomic, strong) LetraAViewController *myVC;
+-(void)alterar:
+(id)sender;
+
 @end

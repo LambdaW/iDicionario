@@ -8,13 +8,13 @@
 
 #import "LetraAViewController.h"
 #import "Contador.h"
-
+#import "AlfabetoLista.h"
 
 @implementation LetraAViewController
 
 
 
-@synthesize i, alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
+@synthesize  alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
 
 
 
@@ -25,24 +25,35 @@
     UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
     return color;
 }
+
+
+
+
 -(void) viewDidLoad {
     [super viewDidLoad];
  
     
-    
-   //  = self.navigationController;
- //   [self.view addSubview:self.navigationController];
-    //self.tabBarController = [[UITabBarController alloc]init];
+
 
 
     
-    
-    
+    UIToolbar *toolB = [[UIToolbar alloc] init];
+    toolB.frame = CGRectMake(0, 70, 60, 54);
+    NSMutableArray *obj = [[NSMutableArray alloc] init];
+    [obj addObject:[[UIBarButtonItem alloc] initWithTitle:@"Editar" style:UIBarButtonItemStylePlain target:self action:@selector(edit:
+                                                                                                                                   )]];
+    [toolB setItems:obj animated:NO];
+   // toolbar.center = self.view.center;
+    [self.view addSubview:toolB];
+
+
 
     NSLog(@"load");
     Contador *sharedManager = [Contador sharedManager];
 
     alfabeto =[NSArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];
+    
+    
     img =[[UIImageView alloc] initWithFrame:CGRectMake(110,200,80,80)];
     NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
     self.title = imgurl;
@@ -70,8 +81,28 @@
     
     
     
-   
 }
+
+-(IBAction)edit:(id)sender{
+    NSLog(@"alterar");
+    //myVC
+    
+    
+    Teste  *viewController = [[Teste alloc]
+                                             initWithNibName:nil
+                                             bundle:nil];
+    
+  UINavigationController *ller = [[UINavigationController alloc] initWithRootViewController:viewController];
+
+    Teste *editarPalavra = [[Teste alloc] initWithNibName:nil bundle:nil];
+    //[self.navigationController pushViewController:editarPalavra animated:NO];
+    //myVC.view = editarPalavra.view ;
+
+    [ller pushViewController:editarPalavra animated:YES];
+
+
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     Contador *sharedManager = [Contador sharedManager];
     NSLog(@"load");
@@ -213,7 +244,6 @@
     
 
 
-//[self myVC]
     Contador *sharedManager = [Contador sharedManager];
     
     [sharedManager nextInt];
@@ -245,26 +275,14 @@
 
         imgurl = [imgurl stringByAppendingString:@".png"];
         
-       // img.image=[UIImage imageNamed:imgurl];
         UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
         img.image= image;
     }
-    
-   // if(myVC == nil){
-       // [self dismissViewControllerAnimated:NO completion:nil];
+
         
         
         [self.navigationController pushViewController:[self myVC] animated:YES];
-   // }else{
-     //   self.view = nil;
-       // ;
-        
-        //[self dismissViewControllerAnimated:YES completion:nil];
-        
-        
-        
-        //[s//elf.navigationController popToViewController:myVC animated:YES];
-   // }
+
 
 }
 -(void)getBack:(id)sender{
@@ -283,23 +301,14 @@
         NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
         self.title = imgurl;
         imgurl = [imgurl stringByAppendingString:@".png"];
-        imgurl  =   [imgurl lowercaseString];
+        imgurl =  [imgurl lowercaseString];
 
         UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
-        img.image= image;
+        img.image = image;
         
         
-            
-       //     [self.navigationController pushViewController:[self myVC] animated:YES];
-       // }else{
-            [self.navigationController pushViewController:[self myVC] animated:YES];
-         //   ;
-            
-          //  [self dismissViewControllerAnimated:YES completion:nil];
-            
-            
-            
-            //[self.navigationController popToViewController:myVC animated:YES];
+        [self.navigationController pushViewController:[self myVC] animated:YES];
+    
         
 
     }

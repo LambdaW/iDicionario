@@ -21,7 +21,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 {
-    Contador *sharedManager = [Contador sharedManager];
 
   
     self.tabBarController =[[UITabBarController alloc] init];
@@ -39,7 +38,6 @@
     
 
     
-    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:secondViewController];
     
     
     //TabBar *table = [[TabBar alloc] init];
