@@ -288,12 +288,11 @@
         UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
         img.image= image;
         
-        if(myVC == nil){
-            
+        
             
        //     [self.navigationController pushViewController:[self myVC] animated:YES];
        // }else{
-            self.view = nil;
+            [self.navigationController pushViewController:[self myVC] animated:YES];
          //   ;
             
           //  [self dismissViewControllerAnimated:YES completion:nil];
@@ -301,7 +300,7 @@
             
             
             //[self.navigationController popToViewController:myVC animated:YES];
-        }
+        
 
     }
 }

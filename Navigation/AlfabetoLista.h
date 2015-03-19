@@ -10,6 +10,13 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AlfabetoLista : UIViewController
+@interface AlfabetoLista : UITableViewController{
+    NSArray *alfabetoArray;
+}
+
+@property NSArray *alfabetoArray;
+@property UILabel *fromLabel;
+-(UIColor *)getRandomColor;
+
 
 @end

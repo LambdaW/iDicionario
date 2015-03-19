@@ -8,119 +8,22 @@
 
 #import "MackenzieAppDelegate.h"
 #import "LetraAViewController.h"
-//#import "AlfabetoLista.h"
+#import "AlfabetoLista.h"
+#import "Contador.h"
 
 
 @implementation MackenzieAppDelegate
 @synthesize tabBarController;
 @synthesize firstViewController;
-//@synthesize secondViewController;
+@synthesize secondViewController;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 {
-    /*
-     LetraAViewController *viewController = [[LetraAViewController alloc]
-     initWithNibName:nil
-     bundle:nil];
-     
-     
-     
-     
-     
-     
-     // viewController = self.navigationController;
-     //   [v1.window makeKeyAndVisible];
-     
-     self.navigationController = [[UINavigationController alloc]
-     initWithRootViewController:viewController];
-     self.tabBarController = [[UITabBarController alloc]init];
-     */
-    /*LetraAViewController *v1 = [[LetraAViewController alloc]init];
-     LetraAViewController *v2 = [[LetraAViewController alloc]init];
-     
-     */
-    /*
-     self.tabBarController.viewControllers = [NSArray arrayWithObjects:v1,v2 ,nil];
-     
-     
-     
-     self.window = [[UIWindow alloc]
-     initWithFrame:[[UIScreen mainScreen] bounds]];
-     
-     
-     self.window.rootViewController = self.tabBarController;
-     
-     self.window.backgroundColor = [UIColor whiteColor];
-     
-     [self.window makeKeyAndVisible];
-     
-     [_window addSubview:self.tabBarController.view];
-     
-     [_window makeKeyAndVisible];
-     
-     
-     
-     // Create the nav controller for the main screen
-     
-     
-     // Present as a modal dialog to start the application
-     
-     [self.tabBarController presentModalViewController:self.navigationController animated:NO];
-     return YES;
-     
-     
-     
-     // Do any additional setup after loading the view.
-     
-     LetraAViewController *viewController = [[LetraAViewController alloc]
-     initWithNibName:nil
-     bundle:nil];
-     
-     
-     self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-     self.tabBarController  = [[UITabBarController alloc] init];
-     
-     
-     + UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
-     + TableViewController *table = [[TableViewController alloc] init];
-     +
-     NSArray *views = [[NSArray alloc] initWithObjects:self.navigationController, table, nil];
-     + [self setViewControllers:views];
-     +
-     + nav.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"A, B, C" image:nil tag:1];
-     + table.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Lista" image:nil tag:*/
-    
-    /*  NSArray *views = [[NSArray alloc] initWithObjects:self.navigationController, self.navigationController, nil];
-     [self.tabBarController setViewControllers:views];
-     
-     self.navigationController.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"A, B, C" image:nil tag:1];
-     v1.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Lista" image:nil tag:2];
-     self.window.rootViewController = self.tabBarController;
-     return YES;
-     
-     
-     */
-    /*
-     LetraAViewController *viewController = [[LetraAViewController alloc]
-     initWithNibName:nil
-     bundle:nil];
-     self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-     TabBar *table = [[TabBar alloc] init];
-     
-     
-     NSArray *views = [[NSArray alloc] initWithObjects:self.navigationController, table, nil];
-     [self.tabBarController setViewControllers:views];
-     
-     self.navigationController.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"A, B, C" image:nil tag:1];
-     table.tabBarItem  = [[UITabBarItem alloc]initWithTitle:@"Lista" image:nil tag:2];
-     
-     self.tabBarController = [[UITabBarController alloc]init];
-     self.window.rootViewController = table;
-     return YES;
-     */
-    UITabBarController *tabBar = [[UITabBarController alloc] init];
+    Contador *sharedManager = [Contador sharedManager];
+
+  
     self.tabBarController =[[UITabBarController alloc] init];
     
     
@@ -128,19 +31,24 @@
     LetraAViewController  *viewController = [[LetraAViewController alloc]
                                              initWithNibName:nil
                                              bundle:nil];
-    // UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
-    //UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+   secondViewController =[[AlfabetoLista alloc] init];
+    
+
+    
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:secondViewController];
     
     
     //TabBar *table = [[TabBar alloc] init];
     
-    NSArray *views = [[NSArray alloc] initWithObjects:self.navigationController, nil];
+    NSArray *views = [[NSArray alloc] initWithObjects:self.navigationController,self.secondViewController, nil];
     [self.tabBarController setViewControllers:views];
     
-    self.navigationController.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"A, B, C" image:nil tag:1];
-    // nav2.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Lista" image:nil tag:2];
+    self.navigationController.tabBarItem = [[UITabBarItem alloc]initWithTitle:nil image:nil tag:1];
+    self.secondViewController.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"Lista" image:nil tag:2];
     
     self.window = [[UIWindow alloc]
                    initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -150,6 +58,8 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
     
     
     

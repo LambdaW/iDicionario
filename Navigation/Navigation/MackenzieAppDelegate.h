@@ -13,7 +13,7 @@
 @interface MackenzieAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) LetraAViewController *firstViewController;
-//@property (strong, nonatomic) AlfabetoLista *secondViewController;
+@property (strong, nonatomic) AlfabetoLista *secondViewController;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) UINavigationController *navigationController;
