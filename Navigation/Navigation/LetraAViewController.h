@@ -16,7 +16,7 @@
 -(UIColor* )getRandomColor;
 @property LetraAViewController *proximo1;
 @property LetraAViewController *proximo2 ;
-
+@property (nonatomic, strong) UINavigationController *navigationController;
 @property UITabBarController *tabBarController;
 @property UILabel *fromLabel;
 @property UIImageView *img;

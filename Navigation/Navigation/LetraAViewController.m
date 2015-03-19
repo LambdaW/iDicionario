@@ -14,7 +14,7 @@
 
 
 
-@synthesize i, alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC;
+@synthesize i, alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
 
 
 
@@ -27,6 +27,18 @@
 }
 -(void) viewDidLoad {
     [super viewDidLoad];
+ 
+    
+    
+   //  = self.navigationController;
+ //   [self.view addSubview:self.navigationController];
+    //self.tabBarController = [[UITabBarController alloc]init];
+
+
+    
+    
+    
+
     NSLog(@"load");
     Contador *sharedManager = [Contador sharedManager];
 
@@ -55,6 +67,9 @@
     [fromLabel setTextAlignment:NSTextAlignmentCenter];
     fromLabel.center = self.view.center;
     [self.view addSubview:fromLabel];
+    
+    
+    
    
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -73,6 +88,7 @@
     UIImage *image = [UIImage imageWithContentsOfFile:file];
   
     img.image= image;
+    
   
 
 
@@ -209,7 +225,6 @@
         img.image= image;
         
         if(myVC == nil){
-            // [self dismissViewControllerAnimated:NO completion:nil];
             
             
             [self.navigationController pushViewController:[self myVC] animated:YES];
@@ -226,7 +241,6 @@
 
     }
 }
-
 
 
 

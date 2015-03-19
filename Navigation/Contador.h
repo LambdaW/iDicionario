@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "LetraAViewController.h"
-#import "LetraBViewController.h"
 
 
 @interface Contador : NSObject

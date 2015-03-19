@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LetraAViewController.h"
 
 @interface MackenzieAppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (strong, nonatomic) LetraAViewController *firstViewController;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UITabBarController *tabBarController;
+
 
 
 @end
