@@ -74,6 +74,8 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     Contador *sharedManager = [Contador sharedManager];
+    NSLog(@"load");
+
 
     self.fromLabel.text = alfabeto[sharedManager.cont];
     NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
@@ -135,6 +137,67 @@
 
 -(LetraAViewController *) myVC;
 {
+    
+    Contador *sharedManager = [Contador sharedManager];
+    NSLog(@"load");
+    
+    
+    self.fromLabel.text = alfabeto[sharedManager.cont];
+    NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+    self.title = imgurl;
+    imgurl  =   [imgurl lowercaseString];
+    NSString *file = [[NSBundle mainBundle] pathForResource:imgurl ofType:@"png"];
+    
+    
+    imgurl = [imgurl stringByAppendingString:@".png"];
+    
+    
+    UIImage *image = [UIImage imageWithContentsOfFile:file];
+    
+    img.image= image;
+    
+    
+    
+    
+    CAKeyframeAnimation *theAnimation = [CAKeyframeAnimation animation];
+    theAnimation.values = [NSArray arrayWithObjects:
+                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(0, 0,1,0)],
+                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.13, 0,1,0)],
+                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.13, 0,1,0)],
+                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(6.26, 0,1,0)],
+                           nil];
+    
+    theAnimation.cumulative = YES;
+    theAnimation.duration = 2.2;
+    theAnimation.repeatCount = 1;
+    theAnimation.removedOnCompletion = YES;
+    
+    
+    theAnimation.timingFunctions =
+    [NSArray arrayWithObjects:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn],
+     
+     [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut],nil
+     ];
+    
+    [img.layer addAnimation:theAnimation forKey:@"transform"];
+    
+    [UIView animateWithDuration:3
+                          delay:0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         [self.view setAlpha:0.7f];
+                         CABasicAnimation *animation = [CABasicAnimation animation];
+                         animation.keyPath = @"position.y";
+                         animation.fromValue = @0;
+                         animation.toValue = @230;
+                         animation.duration = 2;
+                         [img.layer addAnimation:animation forKey:@"basic"];
+                         self.view.backgroundColor = [self getRandomColor];
+                         //   [self.view setBackgroundColor:color];
+                         // [fromLabel setBackgroundColor:blackColor ];
+                     }
+                     completion:^(BOOL finished){
+                     }];
     if (myVC == nil)
         myVC = [[LetraAViewController alloc]initWithNibName:nil bundle:NULL];
     return myVC;
@@ -144,6 +207,7 @@
 
 
 -(void)getNext:(id)sender {
+    
    
     
     
@@ -186,21 +250,21 @@
         img.image= image;
     }
     
-    if(myVC == nil){
+   // if(myVC == nil){
        // [self dismissViewControllerAnimated:NO completion:nil];
         
         
         [self.navigationController pushViewController:[self myVC] animated:YES];
-    }else{
-        self.view = nil;
-        ;
+   // }else{
+     //   self.view = nil;
+       // ;
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        //[self dismissViewControllerAnimated:YES completion:nil];
         
         
         
-        [self.navigationController popToViewController:myVC animated:YES];
-    }
+        //[s//elf.navigationController popToViewController:myVC animated:YES];
+   // }
 
 }
 -(void)getBack:(id)sender{
@@ -227,16 +291,16 @@
         if(myVC == nil){
             
             
-            [self.navigationController pushViewController:[self myVC] animated:YES];
-        }else{
+       //     [self.navigationController pushViewController:[self myVC] animated:YES];
+       // }else{
             self.view = nil;
-            ;
+         //   ;
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+          //  [self dismissViewControllerAnimated:YES completion:nil];
             
             
             
-            [self.navigationController popToViewController:myVC animated:YES];
+            //[self.navigationController popToViewController:myVC animated:YES];
         }
 
     }
