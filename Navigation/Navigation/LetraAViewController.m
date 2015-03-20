@@ -14,7 +14,7 @@
 
 
 @synthesize  alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
-@synthesize  btnEdit, currentPoint;
+@synthesize  btnEdit, currentPoint, _height, _width, _x, _y;
 
 
 -(UIColor *)getRandomColor{
@@ -40,12 +40,12 @@
 }
 
 
-
 -(void) viewDidLoad {
     [super viewDidLoad];
  
-    
+    UIPinchGestureRecognizer *p = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
 
+    [self.view addGestureRecognizer:p];
 
     self.navigationController.toolbarHidden = true;
     
@@ -63,19 +63,15 @@
     
     [self.view addSubview:btnEdit];
     
-
-    
-    
-
-
-
-    NSLog(@"load");
     Contador *sharedManager = [Contador sharedManager];
-
-  /*  alfabeto =[NSArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];*/
-    
     
     img =[[UIImageView alloc] initWithFrame:CGRectMake(110,200,80,80)];
+    _height = img.frame.size.height;
+    _width = img.frame.size.width;
+    _x = img.frame.origin.x;
+    _y = img.frame.origin.y;
+    
+
     NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
     self.title = imgurl;
     
@@ -84,8 +80,8 @@
     UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
     img.image= image;
     
-    //  img.image=[UIImage imageNamed:imgurl];
     self.fromLabel.text = imgurl;
+    
 
     [self.view addSubview:img];
     UIBarButtonItem *next = [[UIBarButtonItem alloc]
@@ -102,15 +98,10 @@
     [self.view addSubview:fromLabel];
     fromLabel.delegate = self;
     [self.view setTag:1];
-
-        
-        
-      //  [img setUserInteractionEnabled:YES];
-    
-    
     
     
 }
+
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -125,11 +116,27 @@
 }
 -(IBAction)edit:(id)sender{
    // NSLog(@"alterar");
+    
     [fromLabel setEnabled:YES];
     [btnEdit setTitle:@"Salvar" forState:UIControlStateHighlighted];
 }
 
 
+- (void)pan:(UIPanGestureRecognizer *)recognizer{
+  
+    _height += 10;
+    _width += 10;
+    
+    img.frame =CGRectMake(img.frame.origin.x,img.frame.origin.y , _width, _height);
+    if(recognizer.state == UIGestureRecognizerStateEnded){
+     img.frame = CGRectMake(img.frame.origin.x, img.frame.origin.y
+                            , 80, 80);
+        _width  = 0;
+        _height = 0;
+     }
+
+
+}
 
 -(void)viewDidAppear:(BOOL)animated{
     Contador *sharedManager = [Contador sharedManager];
@@ -270,18 +277,13 @@
 
 -(void)getNext:(id)sender {
     
-   
-    
-    
-
-
     Contador *sharedManager = [Contador sharedManager];
     
     [sharedManager nextInt];
 
 
     
-    if(    sharedManager.cont <= 25){
+    if(sharedManager.cont <= 25){
         
         self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
         
@@ -346,11 +348,5 @@
 
     }
 }
-
-
-
-
-
-
 
 @end

@@ -26,10 +26,12 @@
 @property UIButton *btnEdit;
 //@property (nonatomic, strong)  Teste *editar;
 @property CGPoint *currentPoint;
+@property int _x, _y, _width, _height;
 
 
+@property int j;
 @property (nonatomic, strong) LetraAViewController *myVC;
 -(void)alterar:
 (id)sender;
-
+-(void)zoomIn;
 @end
