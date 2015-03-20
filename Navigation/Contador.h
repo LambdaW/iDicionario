@@ -15,7 +15,8 @@
     
     int cont;
     
-
+    NSMutableArray  *alfabeto ;
+    
 }
 //@property LetraAViewController *promo2;
 
@@ -24,6 +25,8 @@
 -(void)previousInt;
 -(void)nextInt;
 @property int cont;
+@property NSMutableArray *alfabeto;
+
 
 
 

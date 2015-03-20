@@ -14,7 +14,7 @@
 
 
 @synthesize  alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
-@synthesize LOL;
+@synthesize  btnEdit;
 
 
 -(UIColor *)getRandomColor{
@@ -36,10 +36,10 @@
     
 
 
-
+    self.navigationController.toolbarHidden = true;
     
     UIToolbar *toolB = [[UIToolbar alloc] init];
-    toolB.frame = CGRectMake(0, 70, 60, 54);
+    toolB.frame = CGRectMake(0, 465, self.view.frame.size.width, 54);
     NSMutableArray *obj = [[NSMutableArray alloc] init];
     [obj addObject:[[UIBarButtonItem alloc] initWithTitle:@"Editar" style:UIBarButtonItemStylePlain target:self action:@selector(edit:
                                                                                                                                    )]];
@@ -47,11 +47,11 @@
    // toolbar.center = self.view.center;
     [self.view addSubview:toolB];
     
-    UIButton *btnEdit = [[UIButton alloc] initWithFrame:CGRectMake(0,100, 60, 54)];
+     btnEdit = [[UIButton alloc] initWithFrame:CGRectMake(0,100, 60, 54)];
     [btnEdit addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchUpInside];
-  //  [btnEdit setTitle:@"Click" forState:UIBarButtonItemStylePlain];
     
     [self.view addSubview:btnEdit];
+    
 
     
     
@@ -61,7 +61,7 @@
     NSLog(@"load");
     Contador *sharedManager = [Contador sharedManager];
 
-    alfabeto =[NSArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];
+  /*  alfabeto =[NSArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];*/
     
     
     img =[[UIImageView alloc] initWithFrame:CGRectMake(110,200,80,80)];
@@ -84,33 +84,57 @@
                              initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(getBack:)];
     self.navigationItem.leftBarButtonItem = back;
     //UILabel *alfaLabel = [[UILabel alloc]initWithFrame:YES];
-    fromLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0, 100, 73)];
+    fromLabel = [[UITextField alloc]initWithFrame:CGRectMake(0,0, 100, 73)];
     [fromLabel setTextAlignment:NSTextAlignmentCenter];
     fromLabel.center = self.view.center;
+    [fromLabel setEnabled:NO];
     [self.view addSubview:fromLabel];
+    fromLabel.delegate = self;
     
     
     
 }
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [fromLabel resignFirstResponder];
+    
+    Contador *sharedManager = [Contador sharedManager];
+    [sharedManager.alfabeto replaceObjectAtIndex:sharedManager.cont withObject:fromLabel.text];
+    [btnEdit setTitle:@"Alterar" forState:UIControlStateHighlighted];
+    
+    return YES;
+}
 -(IBAction)edit:(id)sender{
-    NSLog(@"alterar");
+   // NSLog(@"alterar");
+    [fromLabel setEnabled:YES];
+
+    [btnEdit setTitle:@"Salvar" forState:UIControlStateHighlighted];
+
+
     
     
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Altere o nome"  message:@"" delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles:@"Ok",nil];
-    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [alertView show];
+   // UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Altere o nome"  message:@"" delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles:@"Ok",nil];
+    
+  //  [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    
+    //[alertView show];
 
 
 }
+
+
 
 -(void)viewDidAppear:(BOOL)animated{
     Contador *sharedManager = [Contador sharedManager];
     NSLog(@"load");
 
 
-    self.fromLabel.text = alfabeto[sharedManager.cont];
-    NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+    self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
+    
+    
+    NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
     self.title = imgurl;
     imgurl  =   [imgurl lowercaseString];
     NSString *file = [[NSBundle mainBundle] pathForResource:imgurl ofType:@"png"];
@@ -174,9 +198,10 @@
     NSLog(@"load");
     
     
-    self.fromLabel.text = alfabeto[sharedManager.cont];
-    NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
-    self.title = imgurl;
+    self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
+    
+    
+    NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];    self.title = imgurl;
     imgurl  =   [imgurl lowercaseString];
     NSString *file = [[NSBundle mainBundle] pathForResource:imgurl ofType:@"png"];
     
@@ -253,10 +278,10 @@
     
     if(    sharedManager.cont <= 25){
         
-        self.fromLabel.text = alfabeto[sharedManager.cont];
-
-        NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
-
+        self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
+        
+        
+        NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
         self.title = imgurl;
         imgurl = [imgurl stringByAppendingString:@".png"];
 
@@ -267,9 +292,10 @@
     }
     if(sharedManager.cont >= 26){
         sharedManager.cont = 0;
-        self.fromLabel.text = alfabeto[sharedManager.cont];
+        self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
         
-        NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+        
+        NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
         
         self.title = imgurl;
         imgurl  =   [imgurl lowercaseString];
@@ -297,9 +323,10 @@
 
         
         
-        self.fromLabel.text = alfabeto[sharedManager.cont];
+        self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
         
-        NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+        
+        NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
         self.title = imgurl;
         imgurl = [imgurl stringByAppendingString:@".png"];
         imgurl =  [imgurl lowercaseString];

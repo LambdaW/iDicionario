@@ -20,10 +20,10 @@
 @property LetraAViewController *proximo2 ;
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property UITabBarController *tabBarController;
-@property UILabel *fromLabel;
+@property UITextField *fromLabel;
 @property UIImageView *img;
 @property NSArray *alfabeto;
-@property Teste *LOL;
+@property UIButton *btnEdit;
 
 
 //@property (nonatomic, strong)  Teste *editar;

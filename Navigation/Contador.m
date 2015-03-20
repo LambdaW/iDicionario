@@ -10,7 +10,7 @@
 #import "LetraAViewController.h"
 @implementation Contador
 @synthesize cont;
-
+@synthesize alfabeto;
 
 -(void)previousInt{
     cont--;
@@ -44,6 +44,8 @@
 - (id)init {
     if (self = [super init]) {
         cont = 0;
+        alfabeto =[NSMutableArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];
+
     }
     return self;
 }

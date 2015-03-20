@@ -18,4 +18,5 @@
 @property UILabel *fromLabel;
 -(UIColor *)getRandomColor;
 
+
 @end
