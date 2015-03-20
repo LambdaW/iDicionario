@@ -24,9 +24,9 @@
 @property UIImageView *img;
 @property NSArray *alfabeto;
 @property UIButton *btnEdit;
-
-
 //@property (nonatomic, strong)  Teste *editar;
+@property CGPoint *currentPoint;
+
 
 @property (nonatomic, strong) LetraAViewController *myVC;
 -(void)alterar:

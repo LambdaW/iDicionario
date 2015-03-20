@@ -14,7 +14,7 @@
 
 
 @synthesize  alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
-@synthesize  btnEdit;
+@synthesize  btnEdit, currentPoint;
 
 
 -(UIColor *)getRandomColor{
@@ -25,10 +25,21 @@
     return color;
 }
 
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:touch.view];
+    img.center = location;
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self touchesBegan:touches withEvent:event];
+}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"%@",[[alertView textFieldAtIndex:0] text]);
 }
+
+
 
 -(void) viewDidLoad {
     [super viewDidLoad];
@@ -90,6 +101,12 @@
     [fromLabel setEnabled:NO];
     [self.view addSubview:fromLabel];
     fromLabel.delegate = self;
+    [self.view setTag:1];
+
+        
+        
+      //  [img setUserInteractionEnabled:YES];
+    
     
     
     
@@ -109,19 +126,7 @@
 -(IBAction)edit:(id)sender{
    // NSLog(@"alterar");
     [fromLabel setEnabled:YES];
-
     [btnEdit setTitle:@"Salvar" forState:UIControlStateHighlighted];
-
-
-    
-    
-   // UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Altere o nome"  message:@"" delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles:@"Ok",nil];
-    
-  //  [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    
-    //[alertView show];
-
-
 }
 
 
@@ -341,6 +346,8 @@
 
     }
 }
+
+
 
 
 

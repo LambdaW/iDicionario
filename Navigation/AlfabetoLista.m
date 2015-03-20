@@ -31,6 +31,7 @@
     fromLabel.text = @"Lista de Palavras";
  
  
+ 
     fromLabel.font=[fromLabel.font fontWithSize:12];
     
     fromLabel.textColor = [self getRandomColor];
@@ -82,6 +83,7 @@
     UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
     return color;
 }
+
 
 
 @end
