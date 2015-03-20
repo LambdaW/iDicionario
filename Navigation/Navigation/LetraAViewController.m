@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Vinicius Miana. All rights reserved.
 //
 
-#import "LetraAViewController.h"
 #import "Contador.h"
 #import "AlfabetoLista.h"
 
@@ -15,7 +14,7 @@
 
 
 @synthesize  alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
-
+@synthesize LOL;
 
 
 -(UIColor *)getRandomColor{
@@ -27,7 +26,9 @@
 }
 
 
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"%@",[[alertView textFieldAtIndex:0] text]);
+}
 
 -(void) viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +46,15 @@
     [toolB setItems:obj animated:NO];
    // toolbar.center = self.view.center;
     [self.view addSubview:toolB];
+    
+    UIButton *btnEdit = [[UIButton alloc] initWithFrame:CGRectMake(0,100, 60, 54)];
+    [btnEdit addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchUpInside];
+  //  [btnEdit setTitle:@"Click" forState:UIBarButtonItemStylePlain];
+    
+    [self.view addSubview:btnEdit];
+
+    
+    
 
 
 
@@ -85,20 +95,11 @@
 
 -(IBAction)edit:(id)sender{
     NSLog(@"alterar");
-    //myVC
     
     
-    Teste  *viewController = [[Teste alloc]
-                                             initWithNibName:nil
-                                             bundle:nil];
-    
-  UINavigationController *ller = [[UINavigationController alloc] initWithRootViewController:viewController];
-
-    Teste *editarPalavra = [[Teste alloc] initWithNibName:nil bundle:nil];
-    //[self.navigationController pushViewController:editarPalavra animated:NO];
-    //myVC.view = editarPalavra.view ;
-
-    [ller pushViewController:editarPalavra animated:YES];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Altere o nome"  message:@"" delegate:self cancelButtonTitle:@"Cancelar" otherButtonTitles:@"Ok",nil];
+    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    [alertView show];
 
 
 }

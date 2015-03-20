@@ -14,6 +14,7 @@
      NSArray *alfabeto ;
 
 }
+
 -(UIColor* )getRandomColor;
 @property LetraAViewController *proximo1;
 @property LetraAViewController *proximo2 ;
@@ -22,6 +23,9 @@
 @property UILabel *fromLabel;
 @property UIImageView *img;
 @property NSArray *alfabeto;
+@property Teste *LOL;
+
+
 //@property (nonatomic, strong)  Teste *editar;
 
 @property (nonatomic, strong) LetraAViewController *myVC;
