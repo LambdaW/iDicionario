@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "LetraAViewController.h"
-#import <Realm/Realm.h>
-@interface Contador : RLMObject
+@interface Contador : NSObject
 {
     
     int cont;
     
     NSMutableArray  *alfabeto ;
     NSMutableArray *imgPath;
+    NSMutableArray *data;
 }
 //@property LetraAViewController *promo2;
 
@@ -26,6 +26,8 @@
 @property int cont;
 @property NSMutableArray *alfabeto;
 @property NSMutableArray *imgPath;
+@property NSMutableArray *data;
+
 
 
 

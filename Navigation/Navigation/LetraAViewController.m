@@ -16,7 +16,7 @@
 
 
 @synthesize  alfabeto, fromLabel, img, tabBarController, proximo1, proximo2, myVC, navigationController;
-@synthesize  btnEdit, currentPoint, _height, _width, _x, _y;
+@synthesize  btnEdit, currentPoint, _height, _width, _x, _y, datePicker;
 
 
 -(UIColor *)getRandomColor{
@@ -58,8 +58,17 @@
     
     [obj addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(getPhoto)]];
     
+    [obj addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(pickerChanged)]];
+    
+    [obj addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(salvarData)]];
+    
     [toolB setItems:obj animated:NO];
     
+    CGRect pickerFrame = CGRectMake(0,250,0,0);
+    
+    datePicker = [[UIDatePicker alloc] initWithFrame:pickerFrame];
+    [self.view addSubview:datePicker];
+    [datePicker setHidden:YES];
     
     [self.view addSubview:toolB];
     
@@ -82,6 +91,8 @@
     
     imgurl = [imgurl stringByAppendingString:@".png"];
     [self.view addSubview:fromLabel];
+ //   [datePicker setHidden:YES];
+
     
     
     UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
@@ -107,18 +118,43 @@
     [self.view setTag:1];
     
     
+    
+}
+
+-(void)salvarData{
+    
+    Contador *sharedManager = [Contador sharedManager];
+    [sharedManager.data replaceObjectAtIndex:sharedManager.cont withObject:[datePicker date]];
+    [datePicker setHidden:YES];
+    NSLog(@"%@", sharedManager.data[sharedManager.cont]);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sua data foi salva"
+                                                    message:nil
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+
 }
 
 -(void)getPhoto{
+    
+
+    
     UIImagePickerController *cardPicker = [[UIImagePickerController alloc]init];
     cardPicker.allowsEditing = YES;
     cardPicker.delegate = self;
     cardPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self presentModalViewController:cardPicker animated:YES];
+    
 
     
 }
+- (void)pickerChanged
+{
 
+    [datePicker setHidden:NO];
+    
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker
         didFinishPickingImage:(UIImage *)image

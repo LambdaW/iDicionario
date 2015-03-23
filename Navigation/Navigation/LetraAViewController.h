@@ -16,6 +16,8 @@
 }
 
 -(UIColor* )getRandomColor;
+@property UIDatePicker *datePicker;
+
 @property LetraAViewController *proximo1;
 @property LetraAViewController *proximo2 ;
 @property (nonatomic, strong) UINavigationController *navigationController;

@@ -12,6 +12,7 @@
 @synthesize cont;
 @synthesize alfabeto;
 @synthesize imgPath;
+@synthesize data;
 
 -(void)previousInt{
     cont--;
@@ -48,7 +49,11 @@
         alfabeto =[NSMutableArray arrayWithObjects:@"Avião", @"Bola",@"Carro",@"Dado",@"Elefante",@"Fruta",@"Gato",@"Hipopotamo",@"Indio",@"Jacaré",@"Ketchup",@"Lua",@"Macaco",@"Navio",@"Ovo",@"Palhaço",@"Queijo",@"Robô",@"Sapo",@"Tomate",@"Urso",@"Vaca",@"Walkman",@"Xicara",@"Yoda",@"Zebra", nil];
 
          imgPath =[NSMutableArray arrayWithObjects:@"a", @"b",@"c",@"d",@"e",@"f",@"g",@"h",@"i",@"j",@"k",@"l",@"m",@"n",@"o",@"p",@"q",@"r",@"s",@"t",@"u",@"v",@"w",@"x",@"y",@"z", nil];
+        
+         data =[NSMutableArray arrayWithObjects:@"a", @"b",@"c",@"d",@"e",@"f",@"g",@"h",@"i",@"j",@"k",@"l",@"m",@"n",@"o",@"p",@"q",@"r",@"s",@"t",@"u",@"v",@"w",@"x",@"y",@"z", nil];
+    
     }
+    
     return self;
 }
 
