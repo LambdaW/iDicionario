@@ -9,7 +9,9 @@
 #import "Contador.h"
 #import "AlfabetoLista.h"
 
-@implementation LetraAViewController
+@implementation LetraAViewController{
+    NSString *savedImgPath;
+}
 
 
 
@@ -52,10 +54,13 @@
     UIToolbar *toolB = [[UIToolbar alloc] init];
     toolB.frame = CGRectMake(0, 465, self.view.frame.size.width, 54);
     NSMutableArray *obj = [[NSMutableArray alloc] init];
-    [obj addObject:[[UIBarButtonItem alloc] initWithTitle:@"Editar" style:UIBarButtonItemStylePlain target:self action:@selector(edit:
-                                                                                                                                   )]];
+    [obj addObject:[[UIBarButtonItem alloc] initWithTitle:@"Editar" style:UIBarButtonItemStylePlain target:self action:@selector(edit:)]];
+    
+    [obj addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(getPhoto)]];
+    
     [toolB setItems:obj animated:NO];
-   // toolbar.center = self.view.center;
+    
+    
     [self.view addSubview:toolB];
     
      btnEdit = [[UIButton alloc] initWithFrame:CGRectMake(0,100, 60, 54)];
@@ -65,18 +70,20 @@
     
     Contador *sharedManager = [Contador sharedManager];
     
-    img =[[UIImageView alloc] initWithFrame:CGRectMake(110,200,80,80)];
+    img =[[UIImageView alloc] initWithFrame:CGRectMake(110, 200, 80, 80)];
     _height = img.frame.size.height;
     _width = img.frame.size.width;
     _x = img.frame.origin.x;
     _y = img.frame.origin.y;
     
 
-    NSString *imgurl = [alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+    NSString *imgurl = sharedManager.imgPath[sharedManager.cont];
     self.title = imgurl;
     
     imgurl = [imgurl stringByAppendingString:@".png"];
     [self.view addSubview:fromLabel];
+    
+    
     UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
     img.image= image;
     
@@ -102,6 +109,64 @@
     
 }
 
+-(void)getPhoto{
+    UIImagePickerController *cardPicker = [[UIImagePickerController alloc]init];
+    cardPicker.allowsEditing = YES;
+    cardPicker.delegate = self;
+    cardPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    [self presentModalViewController:cardPicker animated:YES];
+
+    
+}
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+        didFinishPickingImage:(UIImage *)image
+                  editingInfo:(NSDictionary *)editingInfo{
+    
+    Contador *sharedManager = [Contador sharedManager];
+
+    
+    
+    
+    
+    
+    //_fotinha.image= image;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,     NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *imgurl = sharedManager.imgPath[sharedManager.cont];
+    imgurl = [imgurl stringByAppendingString:imgurl];
+    NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:sharedManager.alfabeto[sharedManager.cont]];
+    UIImage *imgza = image; // imageView is my image from camera
+    
+   // _fotinha2.image = [UIImage imageNamed:savedImagePath];
+    
+    savedImagePath = [savedImagePath stringByAppendingString:@".png"];
+    
+    
+ //   savedImgPath = [documentsDirectory stringByAppendingPathComponent:imgurl];
+    //UIImage *imga = image; // imageView is my image from camera
+    NSData *imageData = UIImagePNGRepresentation(imgza);
+    [imageData writeToFile:savedImagePath atomically:NO];
+
+    [picker dismissModalViewControllerAnimated:YES];
+
+    
+
+    
+    
+    img.image = [UIImage imageNamed:savedImagePath];
+    [sharedManager.imgPath replaceObjectAtIndex:sharedManager.cont withObject:savedImagePath];
+
+    NSLog(@"%i <-------", sharedManager.cont);
+    NSLog(@"%@ ---------->", sharedManager.imgPath[sharedManager.cont]);
+    
+    
+    NSLog(@"%@", savedImagePath);
+    
+ 
+}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -146,18 +211,19 @@
     self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
     
     
-    NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+    NSString *imgurl = sharedManager.imgPath[sharedManager.cont] ;
     self.title = imgurl;
-    imgurl  =   [imgurl lowercaseString];
+  //  imgurl  =   [imgurl lowercaseString];
     NSString *file = [[NSBundle mainBundle] pathForResource:imgurl ofType:@"png"];
 
-
-    imgurl = [imgurl stringByAppendingString:@".png"];
+  //  imgurl = [imgurl stringByAppendingString:@".png"];
    
+    NSLog(@"%@ ---------!!!!", imgurl
+          );
 
-    UIImage *image = [UIImage imageWithContentsOfFile:file];
+    UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
   
-    img.image= image;
+    img.image = image;
     
   
 
@@ -207,21 +273,20 @@
 {
     
     Contador *sharedManager = [Contador sharedManager];
-    NSLog(@"load");
     
     
     self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
     
     
-    NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];    self.title = imgurl;
-    imgurl  =   [imgurl lowercaseString];
+    NSString *imgurl = sharedManager.imgPath[sharedManager.cont];
+  self.title = imgurl;
+  //  imgurl  =   [imgurl lowercaseString];
     NSString *file = [[NSBundle mainBundle] pathForResource:imgurl ofType:@"png"];
+    UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
+
+ //   imgurl = [imgurl stringByAppendingString:@".png"];
     
     
-    imgurl = [imgurl stringByAppendingString:@".png"];
-    
-    
-    UIImage *image = [UIImage imageWithContentsOfFile:file];
     
     img.image= image;
     
@@ -288,10 +353,11 @@
         self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
         
         
-        NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+        NSString *imgurl = sharedManager.imgPath[sharedManager.cont];
         self.title = imgurl;
-        imgurl = [imgurl stringByAppendingString:@".png"];
-
+       // imgurl = [imgurl stringByAppendingString:@".png"];
+        NSLog(@"%@", imgurl);
+     //   imgurl =[imgurl lowercaseString];
         
         UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
         img.image= image;
@@ -302,12 +368,12 @@
         self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
         
         
-        NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+        NSString *imgurl = sharedManager.imgPath[sharedManager.cont];
         
         self.title = imgurl;
-        imgurl  =   [imgurl lowercaseString];
+      //  imgurl =[imgurl lowercaseString];
 
-        imgurl = [imgurl stringByAppendingString:@".png"];
+     //   imgurl = [imgurl stringByAppendingString:@".png"];
         
         UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
         img.image= image;
@@ -333,12 +399,14 @@
         self.fromLabel.text = sharedManager.alfabeto[sharedManager.cont];
         
         
-        NSString *imgurl = [sharedManager.alfabeto[sharedManager.cont] substringWithRange:NSMakeRange(0, 1)];
+        NSString *imgurl = sharedManager.imgPath[sharedManager.cont];
         self.title = imgurl;
-        imgurl = [imgurl stringByAppendingString:@".png"];
-        imgurl =  [imgurl lowercaseString];
 
-        UIImage *image = [UIImage imageWithContentsOfFile:imgurl];
+        UIImage *image = [UIImage imageNamed:imgurl];
+        //imgurl = [imgurl stringByAppendingString:@".png"];
+
+        NSLog(@"%@", imgurl);
+
         img.image = image;
         
         
